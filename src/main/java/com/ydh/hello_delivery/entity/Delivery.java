@@ -8,7 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class Delivery {
     @Id @GeneratedValue(generator = "delivery_id")
-    @Column("delivery_id")
+    @Column(name = "delivery_id")
     private Long id;
+
     String name;
 }
