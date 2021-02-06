@@ -2,14 +2,25 @@ server:
   port: 8081
 
 spring:
-  h2:
-    console:
-      enabled: true
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:tcp://localhost/~/helloDelivery
     username: sa
     password:
+
   jpa:
     hibernate:
       ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+
+  rabbitmq:
+    host: 192.168.35.199
+    username: hello-delivery
+    password: hello-delivery
+
+logging:
+  level:
+    org.hibernate.SQL: debug
