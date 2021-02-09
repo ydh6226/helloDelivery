@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 public class DeliveryDto {
-    private Long id;
+    private Long deliveryId;
     private String memberName;
     private String itemName;
     private Address address;
+
 }

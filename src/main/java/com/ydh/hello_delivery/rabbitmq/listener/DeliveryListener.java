@@ -11,13 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class DeliveryListener {
 
-    private final String queueName = "delivery2shop.queue";
+    private final String queueName = "shop2delivery.queue";
 
     @RabbitListener(queues = {queueName})
     public void processMessage(String orderJsonString) {
         try {
-//            DeliveryDto dto = new ObjectMapper().readValue(orderJsonString, DeliveryDto.class);
-            DeliveryFeedbackDto dto = new ObjectMapper().readValue(orderJsonString, DeliveryFeedbackDto.class);
+            DeliveryDto dto = new ObjectMapper().readValue(orderJsonString, DeliveryDto.class);
             System.out.println(dto);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
