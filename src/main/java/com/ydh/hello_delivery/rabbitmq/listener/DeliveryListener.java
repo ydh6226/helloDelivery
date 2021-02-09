@@ -8,6 +8,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class DeliveryListener {
 
@@ -21,8 +23,10 @@ public class DeliveryListener {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
-
     }
 
+    static class DeliveryDtoWrapper {
+        private int count;
+        List<DeliveryDto> deliveryDtos;
+    }
 }
