@@ -1,28 +1,39 @@
 package com.ydh.hello_delivery.entity;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Embeddable
 @Getter
 public class DeliveryTime {
-    private final LocalDateTime receptionTime;
+    private final LocalDateTime registerTime;
     private LocalDateTime shippedTime;
-    private LocalDateTime arrivalTime;
+    private LocalDateTime compTime;
 
     protected DeliveryTime() {
-        receptionTime = LocalDateTime.now();
+        registerTime = LocalDateTime.now();
     }
 
     protected void shippedTime() {
         shippedTime = LocalDateTime.now();
     }
 
-    protected void arrivalTime() {
-        arrivalTime = LocalDateTime.now();
+    protected void compTime() {
+        compTime = LocalDateTime.now();
+    }
+
+    public String strGetRegisterTime() {
+        return registerTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
+    }
+
+    public String strGetShippedTime() {
+        return shippedTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
+    }
+
+    public String strGetCompTime() {
+        return compTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
     }
 }

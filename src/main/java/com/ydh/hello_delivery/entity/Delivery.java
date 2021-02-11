@@ -1,17 +1,14 @@
 package com.ydh.hello_delivery.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static javax.persistence.EnumType.STRING;
 
 @Entity
-@Table(name = "orders")
+@NoArgsConstructor
 @Getter
 public class Delivery {
     @Id
@@ -44,5 +41,24 @@ public class Delivery {
         delivery.deliveryTime = new DeliveryTime();
 
         return delivery;
+    }
+
+    //== 비즈니스 로직 ==//
+    public void startDelivery() {
+        deliveryStatus = DeliveryStatus.SHIPPED;
+        deliveryTime.shippedTime();
+    }
+
+    public void startDeliveryRollback() {
+        deliveryStatus = DeliveryStatus.READY;
+    }
+
+    public void endDelivery() {
+        deliveryStatus = DeliveryStatus.COMP;
+        deliveryTime.compTime();
+    }
+
+    public void endDeliveryRollback() {
+        deliveryStatus = DeliveryStatus.READY;
     }
 }
