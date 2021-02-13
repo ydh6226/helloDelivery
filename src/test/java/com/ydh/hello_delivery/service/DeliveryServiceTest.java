@@ -15,14 +15,14 @@ class DeliveryServiceTest {
     @Autowired
     DeliveryService deliveryService;
 
-    @Test
-    @DisplayName("페이징 테스트")
-    public void paging() throws Exception {
-        Page<Delivery> result = deliveryService.findAllWithPaging();
-        System.out.println(result.getTotalPages());
-        System.out.println(result.getNumber());
-        System.out.println(result.getSize());
-        result.getContent().forEach(r -> System.out.println(r.getItemName()));
-    }
+//    @Test
+//    @DisplayName("페이징 테스트")
+//    public void paging() throws Exception {
+//        Page<Delivery> result = deliveryService.findAllWithPaging();
+//        System.out.println(result.getTotalPages());
+//        System.out.println(result.getNumber());
+//        System.out.println(result.getSize());
+//        result.getContent().forEach(r -> System.out.println(r.getItemName()));
+//    }
 
 }

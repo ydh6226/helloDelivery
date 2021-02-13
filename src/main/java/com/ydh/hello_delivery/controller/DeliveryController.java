@@ -22,9 +22,10 @@ public class DeliveryController {
     }
 
     @GetMapping("/")
-    public String homeSearch (Model model, @RequestParam(required = false, defaultValue = "0") int page) {
+    public String homeSearch (Model model, @ModelAttribute("search") DeliverySearch search,
+                              @RequestParam(required = false, defaultValue = "0") int page) {
         PaginationDto pagination = new PaginationDto(page);
-        Page<Delivery> result = deliveryService.findAllWithPaging(pagination);
+        Page<Delivery> result = deliveryService.findAllWithPaging(search, pagination);
 
         model.addAttribute("deliveries", result.getContent());
         model.addAttribute("pageDto", new pageDto(result.getSize(), result.getNumber(), result.getTotalPages()));
@@ -57,6 +58,12 @@ public class DeliveryController {
             this.size = size;
             this.currentPage = currentPage;
             this.lastPage = totalPage - 1;
+
+            if (lastPage <= 9) {
+                startIndex = 0;
+                endIndex = lastPage;
+                return;
+            }
 
             if (currentPage <= 4) {
                 this.startIndex = 0;

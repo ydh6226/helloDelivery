@@ -1,5 +1,6 @@
 package com.ydh.hello_delivery.service;
 
+import com.ydh.hello_delivery.controller.DeliverySearch;
 import com.ydh.hello_delivery.controller.PaginationDto;
 import com.ydh.hello_delivery.entity.Delivery;
 import com.ydh.hello_delivery.exception.NoSuchDelivery;
@@ -29,16 +30,9 @@ public class DeliveryService {
         return deliveryRepository.findAll();
     }
 
-    public Page<Delivery> findAllWithPaging(PaginationDto dto) {
+    public Page<Delivery> findAllWithPaging(DeliverySearch search, PaginationDto dto) {
         PageRequest pageRequest = PageRequest.of(dto.getPage(), dto.getSize());
-        Page<Delivery> result = deliveryRepository.findBySearchWithPaging(pageRequest);
-        return result;
-    }
-
-    public Page<Delivery> findAllWithPaging() {
-        PageRequest pageRequest = PageRequest.of(0, 3);
-        Page<Delivery> result = deliveryRepository.findBySearchWithPaging(pageRequest);
-        return result;
+        return deliveryRepository.findBySearchWithPaging(search, pageRequest);
     }
 
     @Transactional
