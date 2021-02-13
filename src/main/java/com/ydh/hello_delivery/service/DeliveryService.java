@@ -1,5 +1,6 @@
 package com.ydh.hello_delivery.service;
 
+import com.ydh.hello_delivery.controller.PaginationDto;
 import com.ydh.hello_delivery.entity.Delivery;
 import com.ydh.hello_delivery.exception.NoSuchDelivery;
 import com.ydh.hello_delivery.rabbitmq.dto.DeliveryDto;
@@ -8,6 +9,8 @@ import com.ydh.hello_delivery.rabbitmq.dto.MessageType;
 import com.ydh.hello_delivery.rabbitmq.sender.DeliverySender;
 import com.ydh.hello_delivery.repository.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,18 @@ public class DeliveryService {
 
     public List<Delivery> findAll() {
         return deliveryRepository.findAll();
+    }
+
+    public Page<Delivery> findAllWithPaging(PaginationDto dto) {
+        PageRequest pageRequest = PageRequest.of(dto.getPage(), dto.getSize());
+        Page<Delivery> result = deliveryRepository.findBySearchWithPaging(pageRequest);
+        return result;
+    }
+
+    public Page<Delivery> findAllWithPaging() {
+        PageRequest pageRequest = PageRequest.of(0, 3);
+        Page<Delivery> result = deliveryRepository.findBySearchWithPaging(pageRequest);
+        return result;
     }
 
     @Transactional
