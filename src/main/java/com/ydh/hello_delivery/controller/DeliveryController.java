@@ -28,7 +28,7 @@ public class DeliveryController {
         Page<Delivery> result = deliveryService.findAllWithPaging(search, pagination);
 
         model.addAttribute("deliveries", result.getContent());
-        model.addAttribute("pageDto", new pageDto(result.getSize(), result.getNumber(), result.getTotalPages()));
+        model.addAttribute("pageDto", new pageDto(result.getNumber(), result.getTotalPages()));
         return "/deliveryView";
     }
 
@@ -46,22 +46,25 @@ public class DeliveryController {
 
     @Data
     static class pageDto {
-        private final int size;
-
         private final int currentPage;
         private final int lastPage;
 
         private final int startIndex;
         private final int endIndex;
 
-        public pageDto(int size, int currentPage, int totalPage) {
-            this.size = size;
+        public pageDto(int currentPage, int totalPage) {
             this.currentPage = currentPage;
-            this.lastPage = totalPage - 1;
+
+            if (totalPage == 0) {
+                this.lastPage = 0;
+            }
+            else{
+                this.lastPage = totalPage - 1;
+            }
 
             if (lastPage <= 9) {
-                startIndex = 0;
-                endIndex = lastPage;
+                this.startIndex = 0;
+                this.endIndex = lastPage;
                 return;
             }
 

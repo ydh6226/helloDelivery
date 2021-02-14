@@ -5,7 +5,7 @@
 <div class="container-md">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
 
-    <form th:object="${search}" class="form-inline justify-content-center">
+    <form th:object="${search}" class="form-inline justify-content-center" onsubmit="strTrim()">
         <div class="form-group mb-2">
             <input type="text" th:field="*{memberName}" class="form-control" placeholder="고객이름">
         </div>
@@ -96,8 +96,6 @@
         <li class="page-item" th:classappend="${num == currentPage} ? active"
             th:each="num : ${#numbers.sequence(pageDto.startIndex, pageDto.endIndex)}">
             <a class="page-link" th:href="'javascript:paging('+${num}+')'" th:text="${num} + 1"></a>
-<!--            <a class="page-link" th:href="'/?page=' + ${num}" th:text="${num} + 1"></a>-->
-<!--            <button class="page-link" th:text="${num + 1}"> </button>-->
         </li>
 
         <th:block th:if = "${pageDto.currentPage + 4 < pageDto.lastPage}">
@@ -132,6 +130,15 @@
         form.setAttribute("action", "/" + id + "/comp")
         document.body.appendChild(form)
         form.submit()
+    }
+
+    function strTrim() {
+        console.log('hello')
+        console.log('hello')
+        console.log('hello')
+        console.log('hello')
+        let dom = $('input[name="memberName"]')
+        dom.val(dom.val().trim())
     }
 
     function paging(page) {
