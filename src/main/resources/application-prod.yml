@@ -1,0 +1,22 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:mariadb://database-shop.czv6z9c7kqi9.ap-northeast-2.rds.amazonaws.com:3306/test2
+    username: admin
+    password: springboot!
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: true
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+
+  rabbitmq:
+    host: 3.36.203.222
+    username: hello-delivery
+    password: hello-delivery

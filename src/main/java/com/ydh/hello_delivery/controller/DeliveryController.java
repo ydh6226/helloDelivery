@@ -18,7 +18,7 @@ public class DeliveryController {
     @GetMapping("/all")
     public String home(Model model) {
         model.addAttribute("deliveries", deliveryService.findAll());
-        return "/home";
+        return "home";
     }
 
     @GetMapping("/")
@@ -29,7 +29,7 @@ public class DeliveryController {
 
         model.addAttribute("deliveries", result.getContent());
         model.addAttribute("pageDto", new pageDto(result.getNumber(), result.getTotalPages()));
-        return "/deliveryView";
+        return "deliveryView";
     }
 
     @PostMapping("/{id}/ship")
