@@ -4,7 +4,7 @@ import com.ydh.hello_delivery.controller.DeliverySearch;
 import com.ydh.hello_delivery.controller.PaginationDto;
 import com.ydh.hello_delivery.entity.Delivery;
 import com.ydh.hello_delivery.exception.NoSuchDelivery;
-import com.ydh.hello_delivery.rabbitmq.dto.DeliveryDto;
+import com.ydh.hello_delivery.rabbitmq.dto.DeliveryDelegateDto;
 import com.ydh.hello_delivery.rabbitmq.dto.DeliveryFeedbackDto;
 import com.ydh.hello_delivery.rabbitmq.dto.MessageType;
 import com.ydh.hello_delivery.rabbitmq.sender.DeliverySender;
@@ -36,14 +36,14 @@ public class DeliveryService {
     }
 
     @Transactional
-    public Long registerOne(DeliveryDto dto) {
+    public Long registerOne(DeliveryDelegateDto dto) {
         Delivery delivery = deliveryRepository.save(Delivery.createDelivery(dto.getDeliveryId(), dto.getMemberName(),
                 dto.getItemName(), dto.getAddress()));
         return delivery.getId();
     }
 
     @Transactional
-    public List<Long> registerAll(List<DeliveryDto> dtos) {
+    public List<Long> registerAll(List<DeliveryDelegateDto> dtos) {
         List<Delivery> deliveries = dtos.stream()
                 .map(d -> Delivery.createDelivery(d.getDeliveryId(), d.getMemberName(),
                         d.getItemName(), d.getAddress())).collect(Collectors.toList());

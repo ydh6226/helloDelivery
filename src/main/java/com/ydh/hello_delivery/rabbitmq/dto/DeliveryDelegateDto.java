@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class DeliveryDto {
+public class DeliveryDelegateDto {
 
     private Long deliveryId;
     private String memberName;
