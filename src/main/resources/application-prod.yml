@@ -17,6 +17,6 @@ spring:
         default_batch_fetch_size: 100
 
   rabbitmq:
-    host: 3.36.203.222
+    host: 3.36.82.153
     username: hello-delivery
     password: hello-delivery
